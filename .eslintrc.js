@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    "eslint:all",
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
@@ -21,5 +22,14 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    "sort-imports": "off",
+    "sort-keys": "off",
+    "init-declarations": "off",
+    "class-methods-use-this": "off",
+    "no-magic-numbers": "off",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "new-cap": ["error", {
+        "capIsNewExceptionPattern": "@*", // Decoratorだけ許可
+    }],
   },
 };
