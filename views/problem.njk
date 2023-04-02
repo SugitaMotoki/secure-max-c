@@ -9,5 +9,15 @@
   <p>{{ program.classId }}</p>
   <p>{{ program.courseNumber }}</p>
 </div>
+<div>
 {{ program.html | safe }}
+</div>
+<div>
+  <form action="/program-submissions" method="post" enctype="multipart/form-data">
+    <input type="file" id="file" name="file" class="form-control">
+    <input type="hidden" id="user-id" name="userId" class="form-control" value="3">
+    <input type="hidden" id="program-id" name="programId" class="form-control" value="2">
+    <button class="btn btn-primary my-2">提出</button>
+  </form>
+</div>
 {% endblock main %}
