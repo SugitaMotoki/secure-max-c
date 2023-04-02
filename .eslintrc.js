@@ -27,6 +27,10 @@ module.exports = {
     "init-declarations": "off",
     "class-methods-use-this": "off",
     "no-magic-numbers": "off",
+    "no-useless-constructor": "off",
+    "no-return-await": "off",
+    "line-comment-position": "off",
+    "no-inline-comments": "off",
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
     "new-cap": ["error", {
         "capIsNewExceptionPattern": "@*", // Decoratorだけ許可
