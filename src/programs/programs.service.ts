@@ -13,15 +13,6 @@ export class ProgramsService {
   ) {}
 
   async create(createProgramDto: CreateProgramDto) {
-    /*
-     * Const program = new Program();
-     * program.classId = createProgramDto.classId;
-     * program.courseNumber = createProgramDto.courseNumber;
-     * program.levelId = createProgramDto.courseNumber;
-     * program.exerciseNumber = createProgramDto.exerciseNumber;
-     */
-
-    // Return await this.programsRepository.save(program);
     return await this.programsRepository.save(createProgramDto);
   }
 
@@ -34,15 +25,6 @@ export class ProgramsService {
   }
 
   async update(id: number, updateProgramDto: UpdateProgramDto) {
-    /*
-     * Const program = new Program();
-     * program.classId = updateProgramDto.classId!;
-     * program.courseNumber = updateProgramDto.courseNumber!;
-     * program.levelId = updateProgramDto.courseNumber!;
-     * program.exerciseNumber = updateProgramDto.exerciseNumber!;
-     */
-
-    // Return await this.programsRepository.update(id, program);
     return await this.programsRepository.update(id, updateProgramDto);
   }
 

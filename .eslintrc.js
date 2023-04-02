@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     "no-var": "error",
     "one-var": ["error", "never"],
+    "capitalized-comments": "off",
     "sort-imports": "off",
     "sort-keys": "off",
     "init-declarations": "off",
