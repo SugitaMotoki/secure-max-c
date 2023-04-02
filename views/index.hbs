@@ -5,6 +5,12 @@
     <title>App</title>
   </head>
   <body>
-    <p>{{ message }}</p>
+    <form action="/users" method="post">
+      <label for="firstname">名前</label>
+      <input type="text" id="firstname" name="firstName">
+      <label for="lastname">苗字</label>
+      <input type="text" id="lastname" name="lastName">
+      <button>実行</button>
+    </form>
   </body>
 </html>
