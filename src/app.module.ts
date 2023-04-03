@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UsersModule } from "./users/users.module";
 import { ProgramsModule } from "./programs/programs.module";
 import { ProgramSubmissionsModule } from "./program-submissions/program-submissions.module";
+import { CompileModule } from "./compile/compile.module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ProgramSubmissionsModule } from "./program-submissions/program-submissi
     UsersModule,
     ProgramsModule,
     ProgramSubmissionsModule,
+    CompileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
