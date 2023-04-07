@@ -6,7 +6,8 @@ import { UsersModule } from "./users/users.module";
 import { ProgramsModule } from "./programs/programs.module";
 import { ProgramSubmissionsModule } from "./program-submissions/program-submissions.module";
 import { CompileModule } from "./compile/compile.module";
-import { RegisterModule } from './register/register.module';
+import { RegisterModule } from "./register/register.module";
+import { KlassesModule } from "./klasses/klasses.module";
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RegisterModule } from './register/register.module';
     ProgramSubmissionsModule,
     CompileModule,
     RegisterModule,
+    KlassesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
