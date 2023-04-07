@@ -8,6 +8,7 @@ import { ProgramSubmissionsModule } from "./program-submissions/program-submissi
 import { CompileModule } from "./compile/compile.module";
 import { RegisterModule } from "./register/register.module";
 import { KlassesModule } from "./klasses/klasses.module";
+import { LevelsModule } from "./levels/levels.module";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { KlassesModule } from "./klasses/klasses.module";
     CompileModule,
     RegisterModule,
     KlassesModule,
+    LevelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
