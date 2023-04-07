@@ -8,18 +8,28 @@ import {
   Delete,
   ParseIntPipe,
   Render,
+  Redirect,
 } from "@nestjs/common";
 import { ProgramsService } from "./programs.service";
 import { CreateProgramDto } from "./dto/create-program.dto";
 import { UpdateProgramDto } from "./dto/update-program.dto";
+import { KlassesService } from "src/klasses/klasses.service";
 
 @Controller("programs")
 export class ProgramsController {
-  constructor(private readonly programsService: ProgramsService) {}
+  constructor(
+    private readonly programsService: ProgramsService,
+    private readonly klassesService: KlassesService,
+  ) {}
 
   @Post()
-  create(@Body() createProgramDto: CreateProgramDto) {
-    return this.programsService.create(createProgramDto);
+  @Redirect("/")
+  async create(@Body() createProgramDto: CreateProgramDto) {
+    const klass = await this.klassesService.findOne(Number(createProgramDto.klassId))
+    if (!klass) {
+      return "授業が間違っています"
+    }
+    return this.programsService.create(klass, createProgramDto);
   }
 
   @Get()

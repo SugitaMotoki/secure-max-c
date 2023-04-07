@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Program } from "src/programs/entities/program.entity";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Klass {
@@ -10,4 +11,7 @@ export class Klass {
 
   @Column()
   name!: string;
+
+  @OneToOne(() => Program, (program) => program.klass)
+  program!: Program;
 }

@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 import { Program } from "./entities/program.entity";
 import { CreateProgramDto } from "./dto/create-program.dto";
 import { UpdateProgramDto } from "./dto/update-program.dto";
+import { Klass } from "src/klasses/entities/klass.entity";
 
 @Injectable()
 export class ProgramsService {
@@ -12,8 +13,15 @@ export class ProgramsService {
     private readonly programsRepository: Repository<Program>,
   ) {}
 
-  async create(createProgramDto: CreateProgramDto) {
-    return await this.programsRepository.save(createProgramDto);
+  async create(klass: Klass, createProgramDto: CreateProgramDto) {
+    const program = new Program()
+    program.klass = klass;
+    program.courseNumber = createProgramDto.courseNumber;
+    program.levelId = createProgramDto.levelId;
+    program.exerciseNumber = createProgramDto.exerciseNumber;
+    program.title = createProgramDto.title;
+    program.html = createProgramDto.html;
+    return await this.programsRepository.save(program);
   }
 
   async findAll() {
@@ -21,7 +29,10 @@ export class ProgramsService {
   }
 
   async findOne(id: number) {
-    return await this.programsRepository.findOneBy({ id });
+    return await this.programsRepository.findOne({
+      where: { id },
+      relations: ["klass"],
+    });
   }
 
   async update(id: number, updateProgramDto: UpdateProgramDto) {
