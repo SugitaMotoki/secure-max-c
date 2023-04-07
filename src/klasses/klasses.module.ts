@@ -1,10 +1,9 @@
-import { Global, Module } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { KlassesService } from "./klasses.service";
 import { KlassesController } from "./klasses.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Klass } from "./entities/klass.entity";
 
-@Global()
 @Module({
   imports: [TypeOrmModule.forFeature([Klass])],
   controllers: [KlassesController],
