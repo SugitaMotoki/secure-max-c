@@ -1,5 +1,5 @@
 import { Program } from "src/programs/entities/program.entity";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Klass {
@@ -12,6 +12,6 @@ export class Klass {
   @Column()
   name!: string;
 
-  @OneToOne(() => Program, (program) => program.klass)
-  program!: Program;
+  @OneToMany(() => Program, (program) => program.klass)
+  programs!: Program[];
 }

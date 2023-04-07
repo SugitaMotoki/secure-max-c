@@ -1,12 +1,12 @@
 import { Klass } from "src/klasses/entities/klass.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Program {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne(() => Klass, (klass) => klass.program)
+  @ManyToOne(() => Klass, (klass) => klass.programs, { nullable: false })
   @JoinColumn()
   klass!: Klass;
 
