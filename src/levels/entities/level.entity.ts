@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Program } from "src/programs/entities/program.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Level {
@@ -7,4 +8,7 @@ export class Level {
 
   @Column()
   value!: string;
+
+  @OneToMany(() => Program, (program) => program.level)
+  programs!: Program[];
 }

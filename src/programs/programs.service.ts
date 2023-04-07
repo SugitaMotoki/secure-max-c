@@ -5,6 +5,7 @@ import { Program } from "./entities/program.entity";
 import { CreateProgramDto } from "./dto/create-program.dto";
 import { UpdateProgramDto } from "./dto/update-program.dto";
 import { Klass } from "src/klasses/entities/klass.entity";
+import { Level } from "src/levels/entities/level.entity";
 
 @Injectable()
 export class ProgramsService {
@@ -13,11 +14,11 @@ export class ProgramsService {
     private readonly programsRepository: Repository<Program>,
   ) {}
 
-  async create(klass: Klass, createProgramDto: CreateProgramDto) {
-    const program = new Program()
+  async create(klass: Klass, level: Level, createProgramDto: CreateProgramDto) {
+    const program = new Program();
     program.klass = klass;
     program.courseNumber = createProgramDto.courseNumber;
-    program.levelId = createProgramDto.levelId;
+    program.level = level;
     program.exerciseNumber = createProgramDto.exerciseNumber;
     program.title = createProgramDto.title;
     program.html = createProgramDto.html;
@@ -31,7 +32,7 @@ export class ProgramsService {
   async findOne(id: number) {
     return await this.programsRepository.findOne({
       where: { id },
-      relations: ["klass"],
+      relations: ["klass", "level"],
     });
   }
 

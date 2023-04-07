@@ -1,5 +1,12 @@
 import { Klass } from "src/klasses/entities/klass.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Level } from "src/levels/entities/level.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Program {
@@ -13,8 +20,9 @@ export class Program {
   @Column()
   courseNumber!: number;
 
-  @Column()
-  levelId!: number;
+  @ManyToOne(() => Level, (level) => level.programs, { nullable: false })
+  @JoinColumn()
+  level!: Level;
 
   @Column()
   exerciseNumber!: number;
