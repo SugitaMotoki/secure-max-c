@@ -1,0 +1,16 @@
+{% extends "layout.njk" %}
+
+{% block title %}
+登録
+{% endblock title %}
+
+{% block main %}
+<div>
+  <h1>ユーザ</h1>
+  <form action="/users" method="post">
+    <label for="eid" class="form-label">学生番号</label>
+    <input type="text" id="eid" name="eid" class="form-control">
+    <button class="btn btn-primary my-2">実行</button>
+  </form>
+</div>
+{% endblock main %}
