@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   UseInterceptors,
   UploadedFile,
+  Redirect,
 } from "@nestjs/common";
 import { ProgramSubmissionsService } from "./program-submissions.service";
 import { CreateProgramSubmissionDto } from "./dto/create-program-submission.dto";
@@ -27,6 +28,7 @@ export class ProgramSubmissionsController {
 
   @Post()
   @UseInterceptors(FileInterceptor("file"))
+  @Redirect("/")
   async create(
     @Body() createProgramSubmissionDto: CreateProgramSubmissionDto,
     @UploadedFile() file: Express.Multer.File,

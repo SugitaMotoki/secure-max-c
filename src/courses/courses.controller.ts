@@ -8,6 +8,7 @@ import {
   Delete,
   Redirect,
   ParseIntPipe,
+  Render,
 } from "@nestjs/common";
 import { CoursesService } from "./courses.service";
 import { CreateCourseDto } from "./dto/create-course.dto";
@@ -22,7 +23,7 @@ export class CoursesController {
   ) {}
 
   @Post()
-  @Redirect("/")
+  @Redirect("/courses")
   async create(@Body() createCourseDto: CreateCourseDto) {
     const klass = await this.klassesService.findOne(
       Number(createCourseDto.klassId),
@@ -34,8 +35,13 @@ export class CoursesController {
   }
 
   @Get()
-  findAll() {
-    return this.coursesService.findAll();
+  @Render("resources/courses")
+  async findAll() {
+    const klasses = await this.klassesService.findAll()
+    return {
+      klasses: klasses,
+      items: await this.coursesService.findAll()
+    }
   }
 
   @Get(":id")

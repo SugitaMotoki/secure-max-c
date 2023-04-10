@@ -1,5 +1,5 @@
 export class CreateProgramSubmissionDto {
-  userId!: number;
+  userId!: string;
 
   programId!: number;
 

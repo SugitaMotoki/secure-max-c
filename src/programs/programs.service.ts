@@ -29,13 +29,25 @@ export class ProgramsService {
   }
 
   async findAll() {
-    return await this.programsRepository.find();
+    return await this.programsRepository.find({
+      relations: {
+        level: true,
+        course: {
+          klass: true,
+        }
+      },
+    });
   }
 
   async findOne(id: number) {
     return await this.programsRepository.findOne({
       where: { id },
-      relations: ["klass", "level"],
+      relations: {
+        level: true,
+        course: {
+          klass: true,
+        }
+      },
     });
   }
 

@@ -1,0 +1,30 @@
+{% extends "layout.njk" %}
+
+{% block title %}
+レベル 
+{% endblock title %}
+
+{% block main %}
+<h1>レベル</h1>
+<form action="/levels" method="post">
+  <label for="value" class="form-label">値</label>
+  <input type="text" id="value" name="value" class="form-control">
+  <button class="btn btn-primary my-2">実行</button>
+</form>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">value</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for item in items %}
+      <tr>
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.value }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main %}

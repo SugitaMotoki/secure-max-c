@@ -1,0 +1,56 @@
+{% extends "layout.njk" %}
+
+{% block title %}
+プログラム
+{% endblock title %}
+
+{% block main %}
+<h1>プログラム</h1>
+<form action="/programs" method="post">
+  <label for="course-id" class="form-label">課</label>
+  <select id="course-id" name="courseId" class="form-select">
+    {% for course in courses %}
+      <option value={{ course.id }}>{{ course.klass.season }}: 第{{ course.number }}課: {{ course.title }}</option>
+    {% endfor %}
+  </select>
+  <label for="level-id" class="form-label">授業</label>
+  <select id="level-id" name="levelId" class="form-select">
+    {% for level in levels %}
+      <option value={{ level.id }}>{{ level.value }}</option>
+    {% endfor %}
+  </select>
+  <label for="exercise-number" class="form-label">Exercise</label>
+  <input type="number" id="exercise-number" name="exerciseNumber" class="form-control">
+  <label for="title" class="form-label">タイトル</label>
+  <input type="text" id="title" name="title" class="form-control">
+  <label for="html" class="form-label">HTML</label>
+  <input type="text" id="html" name="html" class="form-control">
+  <button class="btn btn-primary my-2">実行</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">授業</th>
+      <th scope="col">課</th>
+      <th scope="col">レベル</th>
+      <th scope="col">Exercise</th>
+      <th scope="col">タイトル</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for item in items %}
+      <tr>
+        <th scope="row"><a href="/programs/{{ item.id }}">{{ item.id }}</a></th>
+        <td>{{ item.course.klass.season }}学期</td>
+        <td>第{{ item.course.number }}課</td>
+        <td>{{ item.level.value }}</td>
+        <td>{{ item.exerciseNumber }}</td>
+        <td>{{ item.title }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main %}
+

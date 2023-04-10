@@ -15,6 +15,7 @@ import { CreateProgramDto } from "./dto/create-program.dto";
 import { UpdateProgramDto } from "./dto/update-program.dto";
 import { LevelsService } from "src/levels/levels.service";
 import { CoursesService } from "src/courses/courses.service";
+import { UsersService } from "src/users/users.service";
 
 @Controller("programs")
 export class ProgramsController {
@@ -22,10 +23,11 @@ export class ProgramsController {
     private readonly programsService: ProgramsService,
     private readonly coursesService: CoursesService,
     private readonly levelsService: LevelsService,
+    private readonly usersService: UsersService,
   ) {}
 
   @Post()
-  @Redirect("/")
+  @Redirect("/programs")
   async create(@Body() createProgramDto: CreateProgramDto) {
     const course = await this.coursesService.findOne(
       Number(createProgramDto.courseId),
@@ -43,15 +45,27 @@ export class ProgramsController {
   }
 
   @Get()
-  findAll() {
-    return this.programsService.findAll();
+  @Render("resources/programs")
+  async findAll() {
+    const courses = await this.coursesService.findAll();
+    const levels = await this.levelsService.findAll();
+    const programs = await this.programsService.findAll();
+    return {
+      courses,
+      levels,
+      items: programs
+    };
   }
 
   @Get(":id")
-  @Render("problem")
+  @Render("program")
   async findOne(@Param("id", ParseIntPipe) id: number) {
+    const users = await this.usersService.findAll();
     const program = await this.programsService.findOne(id);
-    return { program };
+    return {
+      users,
+      program,
+    };
   }
 
   @Patch(":id")

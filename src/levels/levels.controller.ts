@@ -8,6 +8,7 @@ import {
   Delete,
   Redirect,
   ParseIntPipe,
+  Render,
 } from "@nestjs/common";
 import { LevelsService } from "./levels.service";
 import { CreateLevelDto } from "./dto/create-level.dto";
@@ -18,14 +19,17 @@ export class LevelsController {
   constructor(private readonly levelsService: LevelsService) {}
 
   @Post()
-  @Redirect("/")
+  @Redirect("/levels")
   create(@Body() createLevelDto: CreateLevelDto) {
     return this.levelsService.create(createLevelDto);
   }
 
   @Get()
-  findAll() {
-    return this.levelsService.findAll();
+  @Render("resources/levels")
+  async findAll() {
+    return {
+      items: await this.levelsService.findAll(),
+    };
   }
 
   @Get(":id")

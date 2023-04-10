@@ -8,6 +8,7 @@ import {
   Delete,
   ParseIntPipe,
   Redirect,
+  Render,
 } from "@nestjs/common";
 import { KlassesService } from "./klasses.service";
 import { CreateKlassDto } from "./dto/create-klass.dto";
@@ -18,14 +19,17 @@ export class KlassesController {
   constructor(private readonly klassesService: KlassesService) {}
 
   @Post()
-  @Redirect("/")
+  @Redirect("/klasses")
   create(@Body() createKlassDto: CreateKlassDto) {
     return this.klassesService.create(createKlassDto);
   }
 
   @Get()
-  findAll() {
-    return this.klassesService.findAll();
+  @Render("resources/klasses")
+  async findAll() {
+    return {
+      items: await this.klassesService.findAll()
+    }
   }
 
   @Get(":id")

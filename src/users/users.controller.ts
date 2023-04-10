@@ -8,6 +8,7 @@ import {
   Delete,
   Redirect,
   Patch,
+  Render,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -19,18 +20,21 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @Redirect("/")
+  @Redirect("/users")
   async create(@Body() createUserDto: CreateUserDto) {
     await this.usersService.create(createUserDto);
   }
 
   @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  @Render("resources/users")
+  async findAll() {
+    return {
+      items: await this.usersService.findAll()
+    }
   }
 
   @Get(":id")
-  findOne(@Param("id", ParseIntPipe) id: number): Promise<User | null> {
+  findOne(@Param("id") id: string): Promise<User | null> {
     return this.usersService.findOne(id);
   }
 

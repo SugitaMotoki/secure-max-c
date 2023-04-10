@@ -1,0 +1,35 @@
+{% extends "layout.njk" %}
+
+{% block title %}
+クラス
+{% endblock title %}
+
+{% block main %}
+<h1>クラス</h1>
+<form action="/klasses" method="post">
+  <label for="season" class="form-label">季節</label>
+  <input type="text" id="season" name="season" class="form-control">
+  <label for="name" class="form-label">名前</label>
+  <input type="text" id="name" name="name" class="form-control">
+  <button class="btn btn-primary my-2">実行</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">季節</th>
+      <th scope="col">授業名</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for item in items %}
+      <tr>
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.season }}</td>
+        <td>{{ item.name }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main %}

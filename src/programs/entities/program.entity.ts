@@ -15,7 +15,7 @@ export class Program {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Course, (course) => course, { nullable: false })
+  @ManyToOne(() => Course, (course) => course.programs, { nullable: false })
   course!: Course;
 
   @ManyToOne(() => Level, (level) => level.programs, { nullable: false })

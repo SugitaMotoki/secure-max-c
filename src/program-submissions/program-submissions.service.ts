@@ -26,7 +26,7 @@ export class ProgramSubmissionsService {
     programSubmission.source = createProgramSubmissionDto.source;
 
     return await this.programSubmissionsRepository.save(
-      createProgramSubmissionDto,
+      programSubmission,
     );
   }
 

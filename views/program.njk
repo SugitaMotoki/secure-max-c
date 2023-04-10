@@ -1,0 +1,32 @@
+{% extends "layout.njk" %}
+
+{% block title %}
+{{ program.title }}
+{% endblock title %}
+
+{% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/klasses/{{ program.course.klass.id }}">{{ program.course.klass.season }}学期</a></li>
+    <li class="breadcrumb-item"><a href="/courses/{{ program.course.id }}">第{{ program.course.number }}課</a></li>
+    <li class="breadcrumb-item"><a href="/levels/{{ program.level.id }}">{{ program.level.value }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">exercise{{ program.exerciseNumber}}: {{ program.title }}</li>
+  </ol>
+</nav>
+<div class="my-5">
+{{ program.html | safe }}
+</div>
+<div>
+  <form action="/program-submissions" method="post" enctype="multipart/form-data">
+    <label for="user-id" class="form-label">ユーザ</label>
+    <select id="user-id" name="userId" class="form-select">
+      {% for user in users %}
+        <option value={{ user.id }}>{{ user.eid }}</option>
+      {% endfor %}
+    </select>
+    <input type="file" id="file" name="file" class="form-control">
+    <input type="hidden" id="program-id" name="programId" class="form-control" value="{{ program.id }}">
+    <button class="btn btn-primary my-2">提出</button>
+  </form>
+</div>
+{% endblock main %}
