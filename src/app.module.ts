@@ -9,6 +9,7 @@ import { CompileModule } from "./compile/compile.module";
 import { RegisterModule } from "./register/register.module";
 import { KlassesModule } from "./klasses/klasses.module";
 import { LevelsModule } from "./levels/levels.module";
+import { CoursesModule } from "./courses/courses.module";
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { LevelsModule } from "./levels/levels.module";
     RegisterModule,
     KlassesModule,
     LevelsModule,
+    CoursesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
