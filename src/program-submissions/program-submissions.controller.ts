@@ -14,26 +14,42 @@ import { ProgramSubmissionsService } from "./program-submissions.service";
 import { CreateProgramSubmissionDto } from "./dto/create-program-submission.dto";
 import { UpdateProgramSubmissionDto } from "./dto/update-program-submission.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ProgramSubmission } from "./entities/program-submission.entity";
+import { UsersService } from "src/users/users.service";
+import { ProgramsService } from "src/programs/programs.service";
 
 @Controller("program-submissions")
 export class ProgramSubmissionsController {
   constructor(
     private readonly programSubmissionsService: ProgramSubmissionsService,
+    private readonly usersService: UsersService,
+    private readonly programsService: ProgramsService,
   ) {}
 
   @Post()
   @UseInterceptors(FileInterceptor("file"))
-  create(
+  async create(
     @Body() createProgramSubmissionDto: CreateProgramSubmissionDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const programSubmission = new ProgramSubmission();
-    programSubmission.userId = createProgramSubmissionDto.userId;
-    programSubmission.programId = createProgramSubmissionDto.programId;
-    programSubmission.fileName = file.originalname;
-    programSubmission.source = file.buffer.toString();
-    return this.programSubmissionsService.create(programSubmission);
+    createProgramSubmissionDto.fileName = file.originalname;
+    createProgramSubmissionDto.source = file.buffer.toString();
+    const user = await this.usersService.findOne(
+      createProgramSubmissionDto.userId,
+    );
+    if (!user) {
+      return "ユーザ不正";
+    }
+    const program = await this.programsService.findOne(
+      createProgramSubmissionDto.programId,
+    );
+    if (!program) {
+      return "プログラム不正";
+    }
+    return this.programSubmissionsService.create(
+      user,
+      program,
+      createProgramSubmissionDto,
+    );
   }
 
   @Get()

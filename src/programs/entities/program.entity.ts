@@ -1,10 +1,12 @@
 import { Course } from "src/courses/entities/course.entity";
 import { Level } from "src/levels/entities/level.entity";
+import { ProgramSubmission } from "src/program-submissions/entities/program-submission.entity";
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -28,4 +30,10 @@ export class Program {
 
   @Column("text")
   html!: string;
+
+  @OneToMany(
+    () => ProgramSubmission,
+    (programSubmission) => programSubmission.program,
+  )
+  programSubmissions!: ProgramSubmission[];
 }

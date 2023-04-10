@@ -1,9 +1,12 @@
 import { Compile } from "src/compile/entities/compile.entity";
+import { Program } from "src/programs/entities/program.entity";
+import { User } from "src/users/entities/user.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -13,8 +16,13 @@ export class ProgramSubmission {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  userId!: number;
+  @ManyToOne(() => User, (user) => user.programSubmissions, { nullable: false })
+  user!: User;
+
+  @ManyToOne(() => Program, (program) => program.programSubmissions, {
+    nullable: false,
+  })
+  program!: Program;
 
   @Column()
   programId!: number;

@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ProgramSubmission } from "src/program-submissions/entities/program-submission.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id!: number;
 
   @Column()
@@ -10,4 +11,10 @@ export class User {
 
   @Column({ default: true })
   isActive!: boolean;
+
+  @OneToMany(
+    () => ProgramSubmission,
+    (programSubmission) => programSubmission.user,
+  )
+  programSubmissions!: ProgramSubmission[];
 }
