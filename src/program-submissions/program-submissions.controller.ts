@@ -31,7 +31,6 @@ export class ProgramSubmissionsController {
     const programSubmission = new ProgramSubmission();
     programSubmission.userId = createProgramSubmissionDto.userId;
     programSubmission.programId = createProgramSubmissionDto.programId;
-    programSubmission.submittedDate = new Date();
     programSubmission.fileName = file.originalname;
     programSubmission.source = file.buffer.toString();
     return this.programSubmissionsService.create(programSubmission);

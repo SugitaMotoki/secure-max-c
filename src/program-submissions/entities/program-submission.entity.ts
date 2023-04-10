@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Compile } from "src/compile/entities/compile.entity";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class ProgramSubmission {
@@ -17,6 +25,10 @@ export class ProgramSubmission {
   @Column("text")
   source!: string;
 
-  @Column("datetime")
-  submittedDate!: Date;
+  @CreateDateColumn()
+  createdDate!: Date;
+
+  @OneToOne(() => Compile, (compile) => compile.programSubmission)
+  @JoinColumn()
+  compile!: Compile;
 }

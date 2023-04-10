@@ -8,5 +8,6 @@ import { ProgramSubmissionsController } from "./program-submissions.controller";
   imports: [TypeOrmModule.forFeature([ProgramSubmission])],
   controllers: [ProgramSubmissionsController],
   providers: [ProgramSubmissionsService],
+  exports: [ProgramSubmissionsService],
 })
 export class ProgramSubmissionsModule {}
