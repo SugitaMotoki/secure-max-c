@@ -13,25 +13,25 @@ import {
 import { ProgramsService } from "./programs.service";
 import { CreateProgramDto } from "./dto/create-program.dto";
 import { UpdateProgramDto } from "./dto/update-program.dto";
-import { KlassesService } from "src/klasses/klasses.service";
 import { LevelsService } from "src/levels/levels.service";
+import { CoursesService } from "src/courses/courses.service";
 
 @Controller("programs")
 export class ProgramsController {
   constructor(
     private readonly programsService: ProgramsService,
-    private readonly klassesService: KlassesService,
+    private readonly coursesService: CoursesService,
     private readonly levelsService: LevelsService,
   ) {}
 
   @Post()
   @Redirect("/")
   async create(@Body() createProgramDto: CreateProgramDto) {
-    const klass = await this.klassesService.findOne(
-      Number(createProgramDto.klassId),
+    const course = await this.coursesService.findOne(
+      Number(createProgramDto.courseId),
     );
-    if (!klass) {
-      return "クラス不正";
+    if (!course) {
+      return "課不正";
     }
     const level = await this.levelsService.findOne(
       Number(createProgramDto.levelId),
@@ -39,7 +39,7 @@ export class ProgramsController {
     if (!level) {
       return "レベル不正";
     }
-    return this.programsService.create(klass, level, createProgramDto);
+    return this.programsService.create(course, level, createProgramDto);
   }
 
   @Get()

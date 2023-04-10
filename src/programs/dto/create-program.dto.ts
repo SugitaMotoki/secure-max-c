@@ -1,7 +1,5 @@
 export class CreateProgramDto {
-  klassId!: number;
-
-  courseNumber!: number;
+  courseId!: number;
 
   levelId!: number;
 

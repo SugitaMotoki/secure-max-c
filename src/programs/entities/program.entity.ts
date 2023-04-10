@@ -1,4 +1,4 @@
-import { Klass } from "src/klasses/entities/klass.entity";
+import { Course } from "src/courses/entities/course.entity";
 import { Level } from "src/levels/entities/level.entity";
 import {
   Column,
@@ -13,12 +13,8 @@ export class Program {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Klass, (klass) => klass.programs, { nullable: false })
-  @JoinColumn()
-  klass!: Klass;
-
-  @Column()
-  courseNumber!: number;
+  @ManyToOne(() => Course, (course) => course, { nullable: false })
+  course!: Course;
 
   @ManyToOne(() => Level, (level) => level.programs, { nullable: false })
   @JoinColumn()

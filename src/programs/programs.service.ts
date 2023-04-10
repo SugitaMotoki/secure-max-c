@@ -4,8 +4,8 @@ import { Repository } from "typeorm";
 import { Program } from "./entities/program.entity";
 import { CreateProgramDto } from "./dto/create-program.dto";
 import { UpdateProgramDto } from "./dto/update-program.dto";
-import { Klass } from "src/klasses/entities/klass.entity";
 import { Level } from "src/levels/entities/level.entity";
+import { Course } from "src/courses/entities/course.entity";
 
 @Injectable()
 export class ProgramsService {
@@ -14,10 +14,13 @@ export class ProgramsService {
     private readonly programsRepository: Repository<Program>,
   ) {}
 
-  async create(klass: Klass, level: Level, createProgramDto: CreateProgramDto) {
+  async create(
+    course: Course,
+    level: Level,
+    createProgramDto: CreateProgramDto,
+  ) {
     const program = new Program();
-    program.klass = klass;
-    program.courseNumber = createProgramDto.courseNumber;
+    program.course = course;
     program.level = level;
     program.exerciseNumber = createProgramDto.exerciseNumber;
     program.title = createProgramDto.title;
