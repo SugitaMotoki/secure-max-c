@@ -36,7 +36,7 @@ export class ProgramSubmission {
   @CreateDateColumn()
   createdDate!: Date;
 
-  @OneToOne(() => Compile, (compile) => compile.programSubmission)
+  @OneToOne(() => Compile, { nullable: false })
   @JoinColumn()
   compile!: Compile;
 }

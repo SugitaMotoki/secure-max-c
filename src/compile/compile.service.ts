@@ -2,9 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Compile } from "./entities/compile.entity";
 import { Repository } from "typeorm";
-import { CreateCompileDto } from "./dto/create-compile.dto";
-import { ProgramSubmission } from "src/program-submissions/entities/program-submission.entity";
 import { CompileResult } from "./entities/compile-result.entity";
+import { CreateCompileDto } from "./dto/create-compile.dto";
 
 // $.verbose = false;
 
@@ -16,15 +15,15 @@ export class CompileService {
   ) {}
 
   async create(
-    programSubmission: ProgramSubmission,
-    createCompileDto: CreateCompileDto,
+    createCompileDto: CreateCompileDto
   ) {
-    const result = await this.execute(programSubmission.source);
-    createCompileDto.exitCode = result.exitCode;
-    createCompileDto.isSuccess = result.isSuccess;
-    createCompileDto.stdout = result.stdout;
-    createCompileDto.stderr = result.stderr;
-    return await this.compileRepository.save(createCompileDto);
+    const result = await this.execute(createCompileDto.source);
+    const compile = new Compile();
+    compile.isSuccess = result.isSuccess;
+    compile.exitCode = result.exitCode;
+    compile.stdout = result.stdout;
+    compile.stderr = result.stderr;
+    return await this.compileRepository.save(compile);
   }
 
   async findAll() {
@@ -69,7 +68,7 @@ export class CompileService {
     compilleResult.isSuccess = false;
     compilleResult.exitCode = 0;
     compilleResult.stdout = source;
-    compilleResult.stdout = "";
+    compilleResult.stderr = "";
     return await compilleResult;
   }
 }

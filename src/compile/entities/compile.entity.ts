@@ -1,9 +1,7 @@
-import { ProgramSubmission } from "src/program-submissions/entities/program-submission.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -11,9 +9,6 @@ import {
 export class Compile {
   @PrimaryGeneratedColumn()
   id!: number;
-
-  @OneToOne(() => ProgramSubmission)
-  programSubmission!: ProgramSubmission;
 
   @Column("bool")
   isSuccess!: boolean;

@@ -3,11 +3,11 @@ import { CompileService } from "./compile.service";
 import { CompileController } from "./compile.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Compile } from "./entities/compile.entity";
-import { ProgramSubmissionsModule } from "src/program-submissions/program-submissions.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Compile]), ProgramSubmissionsModule],
+  imports: [TypeOrmModule.forFeature([Compile])],
   controllers: [CompileController],
   providers: [CompileService],
+  exports: [CompileService],
 })
 export class CompileModule {}

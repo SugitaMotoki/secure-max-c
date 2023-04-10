@@ -6,6 +6,7 @@ import { CreateProgramSubmissionDto } from "./dto/create-program-submission.dto"
 import { UpdateProgramSubmissionDto } from "./dto/update-program-submission.dto";
 import { User } from "src/users/entities/user.entity";
 import { Program } from "src/programs/entities/program.entity";
+import { Compile } from "src/compile/entities/compile.entity";
 
 @Injectable()
 export class ProgramSubmissionsService {
@@ -17,6 +18,7 @@ export class ProgramSubmissionsService {
   async create(
     user: User,
     program: Program,
+    compile: Compile,
     createProgramSubmissionDto: CreateProgramSubmissionDto,
   ) {
     const programSubmission = new ProgramSubmission();
@@ -24,6 +26,7 @@ export class ProgramSubmissionsService {
     programSubmission.user = user;
     programSubmission.fileName = createProgramSubmissionDto.fileName;
     programSubmission.source = createProgramSubmissionDto.source;
+    programSubmission.compile = compile;
 
     return await this.programSubmissionsRepository.save(
       programSubmission,

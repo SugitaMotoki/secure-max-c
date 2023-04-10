@@ -17,6 +17,7 @@ import { UpdateProgramSubmissionDto } from "./dto/update-program-submission.dto"
 import { FileInterceptor } from "@nestjs/platform-express";
 import { UsersService } from "src/users/users.service";
 import { ProgramsService } from "src/programs/programs.service";
+import { CompileService } from "src/compile/compile.service";
 
 @Controller("program-submissions")
 export class ProgramSubmissionsController {
@@ -24,6 +25,7 @@ export class ProgramSubmissionsController {
     private readonly programSubmissionsService: ProgramSubmissionsService,
     private readonly usersService: UsersService,
     private readonly programsService: ProgramsService,
+    private readonly compileService: CompileService,
   ) {}
 
   @Post()
@@ -47,9 +49,11 @@ export class ProgramSubmissionsController {
     if (!program) {
       return "プログラム不正";
     }
-    return this.programSubmissionsService.create(
+    const compile = await this.compileService.create({ source: createProgramSubmissionDto.source})
+    return await this.programSubmissionsService.create(
       user,
       program,
+      compile,
       createProgramSubmissionDto,
     );
   }
