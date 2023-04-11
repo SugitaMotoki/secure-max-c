@@ -1,9 +1,9 @@
 export class CompileResult {
-  exitCode!: number;
+  exitCode: number = 0;
 
-  isSuccess!: boolean;
+  isSuccess: boolean = true;
 
-  stdout!: string;
+  stdout: string = "";
 
-  stderr!: string;
+  stderr: string = "";
 }

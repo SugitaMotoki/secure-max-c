@@ -49,7 +49,7 @@ export class ProgramSubmissionsController {
     if (!program) {
       return "プログラム不正";
     }
-    const compile = await this.compileService.create({ source: createProgramSubmissionDto.source})
+    const compile = await this.compileService.create({ source: createProgramSubmissionDto.source })
     return await this.programSubmissionsService.create(
       user,
       program,
